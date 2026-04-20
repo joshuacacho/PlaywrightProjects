@@ -2,7 +2,7 @@
 const {test, expect} = require('@playwright/test');
 
 
-test("UI - Incorrect Login - Capture Error Message", async ({page}) => {
+test("@Login UI - Incorrect Login - Capture Error Message", async ({page}) => {
  
     //go to login page
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/#/"); 
@@ -28,8 +28,8 @@ test("UI - Incorrect Login - Capture Error Message", async ({page}) => {
 });
 
 
-//creating another test case using PAGE object only
-test.only("UI Basic Test - Successful Login", async ({page}) => {
+//creating another test case using valid username and password to verify successful login
+test.only("@Login UI Basic Test - Successful Login", async ({page}) => {
 
     //go to login page
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/#/"); 

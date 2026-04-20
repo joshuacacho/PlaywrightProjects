@@ -1,0 +1,13 @@
+[
+  {
+    "username": "testUser63@example.com",
+    "password": "Test@1234",
+    "cartCountURL": "https://rahulshettyacademy.com/api/ecom/user/get-cart-count/**"
+  },
+
+  {
+    "username": "nobueno",
+    "password": "nobueno",
+    "cartCountURL": "nobueno"
+  }
+]

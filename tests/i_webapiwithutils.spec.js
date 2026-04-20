@@ -4,7 +4,7 @@
 const { test, expect, request } = require("@playwright/test");
 //import { test, expect, request } from '@playwright/test';
 //import { APIUtilities } from './utils/APIUtilities.cjs';
-const { APIUtilities } = require('./utils/APIUtilities');
+const { APIUtilities } = require('../utils/APIUtilities');
 
 //global values
 let response;

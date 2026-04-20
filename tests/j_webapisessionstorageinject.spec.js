@@ -19,7 +19,7 @@
 const { test, expect, request } = require("@playwright/test");
 //import { test, expect, request } from '@playwright/test';
 //import { APIUtilities } from './utils/APIUtilities.cjs';
-const { APIUtilities } = require('./utils/APIUtilities');
+const { APIUtilities } = require('../utils/APIUtilities');
 
 //global values
 let webContext;
@@ -62,7 +62,7 @@ test.beforeAll( async ({browser}) => {
     }
 });
 
-test.only("Verify Dashboard Titles IPHONE 13 PRO Exists", async () => {
+test.only("@API Verify Dashboard Titles IPHONE 13 PRO Exists", async () => {
 
     //creatinga. new page using the webContext from .beforeAll with ALL OF THE 
     const page = await webContext.newPage();

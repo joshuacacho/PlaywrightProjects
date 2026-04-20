@@ -43,11 +43,11 @@ test.only("Visual Screen Comparison With Screenshots", async ({page}) => {
     //await hideTextBoxArea.screenshot({path: 'textBoxBeforeHide.png'});
 
     //now we will compare the baseliene screenshot we took above for the entire page
-    expect(await page.screenshot({path: 'pageBeforeScreenshot.png'})).toMatchSnapshot('entirepage.png');
+    expect(await page.screenshot({path: 'todayEntirePageSS.png'})).toMatchSnapshot('baselineEntirepage.png');
 
     //now we will compare the baseline screenshot we took above for just the text box area
         //this will occur each time we do screenshots
-    expect(await hideTextBoxArea.screenshot({path: 'textBoxBeforeHide.png'})).toMatchSnapshot('baselineTextBoxArea.png');
+    expect(await hideTextBoxArea.screenshot({path: 'textBoxTodaySS.png'})).toMatchSnapshot('baselineTextBoxArea.png');
 
 })
 
