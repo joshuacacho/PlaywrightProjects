@@ -10,7 +10,7 @@
     "web": "npx playwright test --grep @Web --headed",
     "//API tests": "API Tests - headless mode by default",
     "api": "npx playwright test --grep @API" ,
-    "//Specific Test": "maybe only run in Safari",
+    "//Specific Tests": "maybe only run in Safari",
     "safari": "npx playwright test tests/g_webdialogsframeseventlisteners.spec.js --config playwright.configParamterize.js --project=projSafariBrowser"
   },
   "keywords": [],
