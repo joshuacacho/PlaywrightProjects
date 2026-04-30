@@ -4,26 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "//Login tests": "Login Tests",
+    "//Login tests": "Login Tests",
     "login": "npx playwright test --grep @Login --headed",
-     "//web tests": "Web Tests",
+    "//web tests": "Web Tests",
     "web": "npx playwright test --grep @Web --headed",
     "//API tests": "API Tests - headless mode by default",
-    "api": "npx playwright test --grep @API" ,
+    "api": "npx playwright test --grep @API",
     "//Specific Tests": "maybe only run in Safari",
-    "safari": "npx playwright test tests/g_webdialogsframeseventlisteners.spec.js --config playwright.configParamterize.js --project=projSafariBrowser"
+    "safari": "npx playwright test tests/g_webdialogsframeseventlisteners.spec.js --config playwright.configParamterize.js --project=projSafariBrowser",
+    "//Cucmber Tests": "Cucumber Tests",
+    "cucumberLoginFailRetry": "npx cucumber-js --tags '@LoginFailBeforeAfterStep' --retry 2  --format html:cucumber-report.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@cucumber/cucumber": "^12.8.2",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.1.0",
-    "allure-playwright": "^3.7.1"
+    "allure-playwright": "^3.7.1",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "exceljs": "^4.1.1"
+    "exceljs": "^3.4.0"
   }
 }
-
