@@ -1,13 +1,13 @@
-const { defineConfig } = require('@playwright/test');
-const { createAzurePlaywrightConfig, ServiceOS } = require('@azure/playwright');
-const { DefaultAzureCredential } = require('@azure/identity');
-const config = require('./playwright.config');
+const { defineConfig } = require("@playwright/test");
+const { createAzurePlaywrightConfig, ServiceOS } = require("@azure/playwright");
+const { DefaultAzureCredential } = require("@azure/identity");
+const config = require("./playwright.config");
 
 /* Learn more about service configuration at https://aka.ms/pww/docs/config */
 export default defineConfig(
   config,
   createAzurePlaywrightConfig(config, {
-    exposeNetwork: '<loopback>',
+    exposeNetwork: "<loopback>",
     connectTimeout: 3 * 60 * 1000, // 3 minutes
     os: ServiceOS.LINUX,
     credential: new DefaultAzureCredential(),
@@ -21,9 +21,6 @@ export default defineConfig(
     This configuration will replace any existing reporter settings from your base config.
     If you're already using other reporters, add them to this array.
     */
-    // reporter: [
-    //   ["html", { open: "never" }],
-    //   ["@azure/playwright/reporter"],
-    // ],
-  }
+    reporter: [["html", { open: "never" }], ["@azure/playwright/reporter"]],
+  },
 );
