@@ -79,7 +79,7 @@ test.only("UI - Free Access...Material URL Takes User To Correct Page and Has Co
     //This pattern prevents flakiness by eliminating the race condition of the new page appearing before the listener is ready
     const newPage =  Promise.all(
         [page.waitForEvent('popup'), //to intercept the new tab that opens
-            page.locator(".blinkingText").click()
+            page.locator("[href*='documents-request']").click()
         ]
     )
     

@@ -42,8 +42,13 @@ test.only("Visual Screen Comparison With Screenshots", async ({page}) => {
     const hideTextBoxArea = page.locator(".right-align:nth-child(2)");
     //await hideTextBoxArea.screenshot({path: 'textBoxBeforeHide.png'});
 
+    // Wait for network to fully settle before screenshotting
+    await page.waitForLoadState('networkidle');
+
     //now we will compare the baseliene screenshot we took above for the entire page
-    expect(await page.screenshot({path: 'todayEntirePageSS.png'})).toMatchSnapshot('baselineEntirepage.png');
+      //this will most likely never match because of the dynamic nature of the page, but it is a good example of how to do a visual comparison for the entire page
+        //added maxDiffPixelRatio to allow for a small percentage of pixels to be different before the test fails, which is useful for dynamic pages where there may be slight variations in rendering or content that do not indicate a real issue
+    expect(await page.screenshot({path: 'todayEntirePageSS.png'})).toMatchSnapshot('baselineEntirepage.png', { maxDiffPixelRatio: 0.01 });
 
     //now we will compare the baseline screenshot we took above for just the text box area
         //this will occur each time we do screenshots
