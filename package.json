@@ -13,7 +13,9 @@
     "//Specific Tests": "maybe only run in Safari",
     "safari": "npx playwright test tests/g_webdialogsframeseventlisteners.spec.js --config playwright.configParamterize.js --project=projSafariBrowser",
     "//Cucmber Tests": "Cucumber Tests",
-    "cucumberLoginFailRetry": "npx cucumber-js --tags '@LoginFailBeforeAfterStep' --retry 2  --format html:cucumber-report.html"
+    "cucumberLoginFailRetry": "npx cucumber-js --tags '@LoginFailBeforeAfterStep' --retry 2  --format html:cucumber-report.html",
+    "//Microsoft Azure Tests": "Microsoft Azure Tests",
+    "azureCloud": "npx playwright test --config=playwright.service.config.ts --workers=4"
   },
   "keywords": [],
   "author": "",
