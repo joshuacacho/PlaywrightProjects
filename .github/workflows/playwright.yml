@@ -4,7 +4,7 @@ on: #event triggers for the workflow when code is pushed to the repository or wh
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-jobs: #jobs that get triggered by the above events under on within the pipeline
+jobs: #a set of steps that will be executed as part of the workflow, in this case we have a single job called "test" that will run our Playwright tests
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs: #jobs that get triggered by the above events under on within the pipeline
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
-      if: co{ !cancelled() }}
+      if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
