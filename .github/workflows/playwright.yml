@@ -1,5 +1,5 @@
 name: Playwright Tests
-on: #event triggers for the workflow when code is pushed to the repository or when a pull request is opened against the main or master branch,fdsadsf
+on: #event triggers for the workflow when code is pushed to the repository or when a pull request is opened against the main or master branch
   push:
     branches: [ main, master ]
   pull_request:
@@ -27,7 +27,7 @@ jobs: #a set of steps that will be executed as part of the workflow, in this cas
       env:
         #tests will all be triggered in the cloud environment, so we will use the service URL stored in the repository variables to connect to the Playwright service in Azure
         creds: ${{ vars.PLAYWRIGHT_SERVICE_URL }}
-      run: npx playwright test --config=playwright.service.config.ts --workers=4
+      run: npx playwright test --config=playwright.service.config.js --workers=4
         # local command to run tests npx playwright test
         # cloud command to run tests npx playwright test --config=playwright.service.config.ts --workers=4
     - uses: actions/upload-artifact@v4
