@@ -15,8 +15,9 @@ jobs: #a set of steps that will be executed as part of the workflow, in this cas
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      #dont need to isntall the browsers in the github workflow because we will be running the tests in the cloud environment, so we will use the browsers that are already installed in the cloud environment
+    # - name: Install Playwright Browsers
+    #   run: npx playwright install --with-deps
       #for azure login if we want to include the azure login step in the workflow, we will need to add the azure/login action and use the credentials stored in the repository secrets to authenticate with Azure. This will allow us to run our Playwright tests in the Azure cloud environment.
     - name: Azure Login
       uses: azure/login@v3
