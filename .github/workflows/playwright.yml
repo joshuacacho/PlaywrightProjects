@@ -28,6 +28,13 @@ jobs: #a set of steps that will be executed as part of the workflow, in this cas
       env:
         PLAYWRIGHT_SERVICE_URL: ${{ vars.PLAYWRIGHT_SERVICE_URL }}
       run: npx playwright test --config=playwright.service.config.js --update-snapshots
+    - name: Commit snapshots
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add tests/**/*-snapshots/
+        git commit -m "add linux baseline snapshots" || echo "No changes to commit"
+        git push
     - name: Run Playwright tests
       env:
         #tests will all be triggered in the cloud environment, so we will use the service URL stored in the repository variables to connect to the Playwright service in Azure
