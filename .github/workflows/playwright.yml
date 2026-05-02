@@ -29,6 +29,8 @@ jobs: #a set of steps that will be executed as part of the workflow, in this cas
         #tests will all be triggered in the cloud environment, so we will use the service URL stored in the repository variables to connect to the Playwright service in Azure
         PLAYWRIGHT_SERVICE_URL: ${{ vars.PLAYWRIGHT_SERVICE_URL }}
       run: npx playwright test --config=playwright.service.config.js --workers=4
+    - name: Update Playwright snapshots
+      run: npx playwright test --config=playwright.service.config.js --update-snapshots
         # local command to run tests npx playwright test
         # cloud command to run tests npx playwright test --config=playwright.service.config.ts --workers=4
     - uses: actions/upload-artifact@v4
