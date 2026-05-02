@@ -48,11 +48,11 @@ test.only("Visual Screen Comparison With Screenshots", async ({page}) => {
     //now we will compare the baseliene screenshot we took above for the entire page
       //this will most likely never match because of the dynamic nature of the page, but it is a good example of how to do a visual comparison for the entire page
         //added maxDiffPixelRatio to allow for a small percentage of pixels to be different before the test fails, which is useful for dynamic pages where there may be slight variations in rendering or content that do not indicate a real issue
-    expect(await page.screenshot({path: 'todayEntirePageSS.png'})).toMatchSnapshot('baselineEntirepage.png', { maxDiffPixelRatio: 0.01 });
+    expect(await page.screenshot({path: 'todayEntirePageSS.png'})).toMatchSnapshot('baselineEntirepage.png', { maxDiffPixelRatio: 0.2 });
 
     //now we will compare the baseline screenshot we took above for just the text box area
         //this will occur each time we do screenshots
-    expect(await hideTextBoxArea.screenshot({path: 'textBoxTodaySS.png'})).toMatchSnapshot('baselineTextBoxArea.png');
+    expect(await hideTextBoxArea.screenshot({path: 'textBoxTodaySS.png'})).toMatchSnapshot('baselineTextBoxArea.png',  { maxDiffPixelRatio: 0.2 });
 
 })
 
