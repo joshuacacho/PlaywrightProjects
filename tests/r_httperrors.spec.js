@@ -14,10 +14,13 @@ const { createECDH } = require('node:crypto');
 */
 
 //catch error via explcitiy catch
-test("HTTPS Status Error - Expired Certificate Direct Catch Throw Error", async({page}) => {
+test("HTTPS Status Error - Expired Certificate Direct Catch Throw Error", async({browser}) => {
     
     try {
-        //navigate to url
+        //Create a new browser context that ignores HTTPS errors
+        const context = await browser.newContext({ ignoreHTTPSErrors: false }); // Set to true to ignore SSL errors, false to catch them
+        const page = await context.newPage();
+            //navigate to url
         await page.goto("https://expired.badssl.com/");
     }
     catch (error) {
@@ -39,7 +42,7 @@ test("HTTPS Status Error - Using New Browser Context ignoreHTTPSErrors Within Th
   
   
     // Create a new browser context that ignores HTTPS errors
-    const context = await browser.newContext({ ignoreHTTPSErrors: false }); // Set to true to ignore SSL errors, false to catch them
+    const context = await browser.newContext({ ignoreHTTPSErrors: true }); // Set to true to ignore SSL errors, false to catch them
     const page = await context.newPage();
     
     //navigate to url
@@ -51,7 +54,7 @@ test("HTTPS Status Error - Using New Browser Context ignoreHTTPSErrors Within Th
 });
 
 //using global value within package.config.js file
-test.only("HTTPS Status Error - Using package.config.js Global Setting ignoreHTTPSErrors", async({page}) => {
+test("HTTPS Status Error - Using package.config.js Global Setting ignoreHTTPSErrors", async({page}) => {
       
     //navigate to url
      await page.goto("https://expired.badssl.com/");

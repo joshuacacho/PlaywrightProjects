@@ -26,7 +26,7 @@ const config = ({
   //run tests in a single worker to avoid any issues with parallel execution, especially when dealing with shared resources or state that may not be thread-safe. This can help to ensure that tests run sequentially and do not interfere with each other, which can be particularly important for certain types of tests that rely on specific timing or order of execution.
   workers: 8,
   //number of times to retry a failed test, can be set to a specific number or to 0 to disable retries, this can be useful for handling flaky tests and improving test stability by allowing them to be retried a certain number of times before being marked as failed.
-  retries: 2,  
+  retries: 1,  
   //add reporter in html
   reporter: 'html',
   use: {
@@ -54,6 +54,7 @@ const config = ({
       // 'retain-on-failure': Records a trace for every test but deletes it if the test passes, keeping only failure data.
       // 'retain-on-first-failure': Similar to retain-on-failure but specifically for the first attempt.
     trace: 'on', //only on failure basically
+    ignoreHTTPSErrors: true, //ignores any https errors that may come up during execution, which can be useful for testing sites with self-signed certificates or in development environments where SSL may not be properly configured
   }
 });
 
