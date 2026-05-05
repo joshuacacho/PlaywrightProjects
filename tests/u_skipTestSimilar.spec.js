@@ -6,7 +6,7 @@ const selenPracticeURL =
   "https://rahulshettyacademy.com/seleniumPractise/#/offers";
 
 test.skip("GetByLabel & Playwright UI Runner", async ({ page }) => {
-  await goToURL(page, homePageURL);
+  await goToURL(page, homePageURL)
 
   //playwright GetByLabel checkbox 
   const getByLabelCheckCox = page.getByLabel(
@@ -18,16 +18,16 @@ test.skip("GetByLabel & Playwright UI Runner", async ({ page }) => {
   //playwright GetByLabel dropdown
   const getByLabelDropDown = page.getByLabel("Gender");
   await getByLabelDropDown.selectOption("Female");
-  expect(getByLabelDropDown).toHaveValue("Female");
+  await expect(getByLabelDropDown).toHaveValue("Female");
 
   //playwright GetByLabel radio button
   const getByLabelRadioButton = page.getByLabel("Employed");
   await getByLabelRadioButton.click();
-  expect(getByLabelRadioButton).toBeChecked();
+  await expect(getByLabelRadioButton).toBeChecked();
 
   const getByLabelRadioButton2 = page.getByLabel("Student");
   await getByLabelRadioButton2.check();
-  expect(getByLabelRadioButton2).toBeChecked();
+  await expect(getByLabelRadioButton2).toBeChecked();
 
   //await page.pause();
 });

@@ -1,0 +1,20 @@
+{
+	"servers": {
+		"playwright": {
+			"type": "stdio",
+			"sandboxEnabled": true,
+			"command": "npx",
+			"cwd": "/Users/cachomac/Documents/Udemy Courses/Playwright",
+			"args": [
+				"@playwright/mcp@latest",
+			],
+			"dev": {
+				"watch": [],
+				"debug": {
+					"type": "node"
+				}
+			}
+		}
+	},
+	"inputs": []
+}
