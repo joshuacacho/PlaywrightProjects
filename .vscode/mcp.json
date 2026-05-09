@@ -1,12 +1,20 @@
 {
 	"servers": {
+		"playwright-test": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"playwright",
+				"run-test-mcp-server"
+			]
+		},
 		"playwright": {
 			"type": "stdio",
 			"sandboxEnabled": true,
 			"command": "npx",
-			"cwd": "/Users/cachomac/Documents/Udemy Courses/Playwright",
+			"cwd": "${input:cwd}",
 			"args": [
-				"@playwright/mcp@latest",
+				"@playwright/mcp@0.0.75"
 			],
 			"dev": {
 				"watch": [],
@@ -16,5 +24,11 @@
 			}
 		}
 	},
-	"inputs": []
+	"inputs": [
+		{
+			"id": "cwd",
+			"type": "promptString",
+			"description": "Working Directory"
+		}
+	]
 }

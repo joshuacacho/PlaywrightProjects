@@ -9,6 +9,7 @@ class DashboardPage{
         this.cardProductButton = page.locator("button");
         this.itemsInCart = page.getByRole('button', { name: '   Cart' });
         this.cartCountSuccToast = page.getByRole('alert', { name: 'Product Added To Cart' });
+        this.productCardTitle =  page.locator(".card-body h5");
     }
 
     //add random item to the cart
@@ -76,8 +77,22 @@ class DashboardPage{
         return cartCount;
     }
     
+    //verify if product is present
+        //never tried but should work since we are just filtering the list of product names we have already obtained and checking if the product name we are looking for is in that list and visible on the page
+    async verifyProductExists(productName) {
+        try {
+            const productCard = this.productCardTitle.filter({ hasText: productName });
+            //console.log(await productCard.isVisible());
+            return await productCard.isVisible();
+        } catch (error) {
+            console.error(error.stack);
+            return false;
+        }
+    }
 
 }
 
 
 module.exports = { DashboardPage };
+
+
