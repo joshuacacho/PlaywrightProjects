@@ -1,0 +1,50 @@
+- generic [ref=e1182]:
+  - banner [ref=e1183]:
+    - generic [ref=e1184]:
+      - generic [ref=e1185]: GREENKART
+      - link "Get Shortlisted by Recruiters - Take QA Skill Assessments on TechSmartHire" [ref=e1186] [cursor=pointer]:
+        - /url: https://techsmarthire.com/
+      - link "Get Shortlisted by Recruiters - Take QA Skill Assessments on TechSmartHire" [ref=e1187] [cursor=pointer]:
+        - /url: https://techsmarthire.com/
+  - generic [ref=e1189]:
+    - table [ref=e1190]:
+      - rowgroup [ref=e1191]:
+        - row "# Product Name Quantiry Price Total" [ref=e1192]:
+          - cell "#" [ref=e1193]
+          - cell "Product Name" [ref=e1194]
+          - cell "Quantiry" [ref=e1195]
+          - cell "Price" [ref=e1196]
+          - cell "Total" [ref=e1197]
+      - rowgroup [ref=e1198]:
+        - row "Brocolli - 1 Kg 1 120 120" [ref=e1199]:
+          - cell [ref=e1200]:
+            - img [ref=e1201]
+          - cell "Brocolli - 1 Kg" [ref=e1202]:
+            - paragraph [ref=e1203]: Brocolli - 1 Kg
+          - cell "1" [ref=e1204]:
+            - paragraph [ref=e1205]: "1"
+          - cell "120" [ref=e1206]:
+            - paragraph [ref=e1207]: "120"
+          - cell "120" [ref=e1208]:
+            - paragraph [ref=e1209]: "120"
+        - row "Cauliflower - 1 Kg 1 60 60" [ref=e1210]:
+          - cell [ref=e1211]:
+            - img [ref=e1212]
+          - cell "Cauliflower - 1 Kg" [ref=e1213]:
+            - paragraph [ref=e1214]: Cauliflower - 1 Kg
+          - cell "1" [ref=e1215]:
+            - paragraph [ref=e1216]: "1"
+          - cell "60" [ref=e1217]:
+            - paragraph [ref=e1218]: "60"
+          - cell "60" [ref=e1219]:
+            - paragraph [ref=e1220]: "60"
+    - generic [ref=e1221]:
+      - generic [ref=e1222]:
+        - textbox "Enter promo code" [ref=e1223]
+        - button "Apply" [ref=e1224] [cursor=pointer]
+      - text: "No. of Items : 2"
+      - text: "Total Amount :"
+      - generic [ref=e1225]: "180"
+      - text: "Discount : 0%"
+      - text: "Total After Discount : 180"
+      - button "Place Order" [ref=e1226] [cursor=pointer]
