@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "EventHub" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img [ref=e10]
+        - generic [ref=e12]: EventHub
+      - generic [ref=e13]:
+        - link "Home" [ref=e14] [cursor=pointer]:
+          - /url: /
+        - link "Events" [ref=e15] [cursor=pointer]:
+          - /url: /events
+        - link "My Bookings" [ref=e16] [cursor=pointer]:
+          - /url: /bookings
+        - link "API Docs" [ref=e17] [cursor=pointer]:
+          - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+        - button "Admin" [ref=e19] [cursor=pointer]:
+          - text: Admin
+          - img [ref=e20]
+        - generic [ref=e22]:
+          - generic "rahulshetty1@gmail.com" [ref=e23]
+          - button "Logout" [ref=e24] [cursor=pointer]
+  - main [ref=e25]:
+    - generic [ref=e148]:
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - heading "My Bookings" [level=1] [ref=e151]
+          - paragraph [ref=e152]: View and manage all your ticket bookings
+        - generic [ref=e153]:
+          - button "Clear all bookings" [ref=e154] [cursor=pointer]
+          - paragraph [ref=e155]: Do this often for clean test data.
+      - generic [ref=e156]:
+        - img [ref=e158]
+        - heading "No bookings yet" [level=3] [ref=e160]
+        - paragraph [ref=e161]: You haven't booked any events yet. Browse upcoming events and grab your tickets!
+        - link "Browse Events" [ref=e163] [cursor=pointer]:
+          - /url: /events
+          - button "Browse Events" [ref=e164]
+  - contentinfo [ref=e96]:
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - heading "Rahul Shetty Academy" [level=3] [ref=e100]
+          - paragraph [ref=e101]: India's leading QA automation training academy — empowering engineers to build real-world testing skills.
+        - generic [ref=e102]:
+          - heading "Popular Courses" [level=3] [ref=e103]
+          - list [ref=e104]:
+            - listitem [ref=e105]:
+              - link "Selenium WebDriver with Java" [ref=e106] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e107]:
+              - link "Playwright with JavaScript" [ref=e108] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e109]:
+              - link "RestAssured API Testing" [ref=e110] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e111]:
+              - link "Cypress End-to-End Testing" [ref=e112] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e113]:
+              - link "Appium Mobile Testing" [ref=e114] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+        - generic [ref=e115]:
+          - heading "QA Job Hiring Platform" [level=3] [ref=e116]
+          - paragraph [ref=e117]: Get hired faster — take skill assessments trusted by top QA employers worldwide.
+          - link "techsmarthire.com →" [ref=e118] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+        - generic [ref=e119]:
+          - heading "EventHub Practice App" [level=3] [ref=e120]
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - link "Browse Events" [ref=e123] [cursor=pointer]:
+                - /url: /events
+            - listitem [ref=e124]:
+              - link "My Bookings" [ref=e125] [cursor=pointer]:
+                - /url: /bookings
+            - listitem [ref=e126]:
+              - link "Manage Events" [ref=e127] [cursor=pointer]:
+                - /url: /admin/events
+            - listitem [ref=e128]:
+              - link "API Documentation" [ref=e129] [cursor=pointer]:
+                - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+      - generic [ref=e130]:
+        - paragraph [ref=e131]: © 2026 Rahul Shetty Academy. All rights reserved.
+        - generic [ref=e132]:
+          - link "rahulshettyacademy.com →" [ref=e133] [cursor=pointer]:
+            - /url: https://rahulshettyacademy.com
+          - link "techsmarthire.com →" [ref=e134] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+  - generic [ref=e166]:
+    - generic [ref=e168]: ✓
+    - paragraph [ref=e169]: Booking cancelled successfully
+    - button "Dismiss" [ref=e170] [cursor=pointer]: ×
+  - alert [ref=e4]

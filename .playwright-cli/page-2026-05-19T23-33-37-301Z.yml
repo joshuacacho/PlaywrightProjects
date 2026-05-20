@@ -1,0 +1,156 @@
+- generic [ref=e1]:
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "EventHub" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img [ref=e10]
+        - generic [ref=e12]: EventHub
+      - generic [ref=e13]:
+        - link "Home" [ref=e14] [cursor=pointer]:
+          - /url: /
+        - link "Events" [ref=e15] [cursor=pointer]:
+          - /url: /events
+        - link "My Bookings" [ref=e16] [cursor=pointer]:
+          - /url: /bookings
+        - link "API Docs" [ref=e17] [cursor=pointer]:
+          - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+        - button "Admin" [ref=e19] [cursor=pointer]:
+          - text: Admin
+          - img [ref=e20]
+        - generic [ref=e22]:
+          - generic "rahulshetty1@gmail.com" [ref=e23]
+          - button "Logout" [ref=e24] [cursor=pointer]
+  - main [ref=e25]:
+    - generic [ref=e26]:
+      - navigation [ref=e27]:
+        - link "My Bookings" [ref=e28] [cursor=pointer]:
+          - /url: /bookings
+        - generic [ref=e29]: /
+        - generic [ref=e30]: D-4ZB62F
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: D-4ZB62F
+            - generic [ref=e35]: confirmed
+          - heading "Dilli Diwali Mela" [level=1] [ref=e36]
+        - button "Cancel Booking" [active] [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - heading "Event Details" [level=2] [ref=e40]
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - generic [ref=e43]: Event
+              - generic [ref=e44]: Dilli Diwali Mela
+            - generic [ref=e45]:
+              - generic [ref=e46]: Category
+              - generic [ref=e47]: Festival
+            - generic [ref=e48]:
+              - generic [ref=e49]: Date
+              - generic [ref=e50]: Tuesday, 20 October 2026
+            - generic [ref=e51]:
+              - generic [ref=e52]: Venue
+              - generic [ref=e53]: Pragati Maidan Exhibition Grounds
+            - generic [ref=e54]:
+              - generic [ref=e55]: City
+              - generic [ref=e56]: Delhi
+        - generic [ref=e57]:
+          - heading "Customer Details" [level=2] [ref=e58]
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - generic [ref=e61]: Name
+              - generic [ref=e62]: rahul
+            - generic [ref=e63]:
+              - generic [ref=e64]: Email
+              - generic [ref=e65]: rahulshetty1@gmail.com
+            - generic [ref=e66]:
+              - generic [ref=e67]: Phone
+              - generic [ref=e68]: "5555555555"
+        - generic [ref=e69]:
+          - heading "Payment Summary" [level=2] [ref=e70]
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - generic [ref=e73]: Tickets
+              - generic [ref=e74]: "1"
+            - generic [ref=e75]:
+              - generic [ref=e76]: Price per ticket
+              - generic [ref=e77]: $300
+            - generic [ref=e78]:
+              - generic [ref=e79]: Total Paid
+              - generic [ref=e80]: $300
+        - generic [ref=e81]:
+          - heading "Refund" [level=2] [ref=e82]
+          - button "Check eligibility for refund?" [ref=e83] [cursor=pointer]
+        - generic [ref=e84]:
+          - heading "Booking Information" [level=2] [ref=e85]
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - generic [ref=e88]: Booked on
+              - generic [ref=e89]: Tuesday, 19 May 2026
+            - generic [ref=e90]:
+              - generic [ref=e91]: Booking ID
+              - generic [ref=e92]: "#38450"
+      - link "← Back to My Bookings" [ref=e94] [cursor=pointer]:
+        - /url: /bookings
+        - button "← Back to My Bookings" [ref=e95]
+  - contentinfo [ref=e96]:
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - heading "Rahul Shetty Academy" [level=3] [ref=e100]
+          - paragraph [ref=e101]: India's leading QA automation training academy — empowering engineers to build real-world testing skills.
+        - generic [ref=e102]:
+          - heading "Popular Courses" [level=3] [ref=e103]
+          - list [ref=e104]:
+            - listitem [ref=e105]:
+              - link "Selenium WebDriver with Java" [ref=e106] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e107]:
+              - link "Playwright with JavaScript" [ref=e108] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e109]:
+              - link "RestAssured API Testing" [ref=e110] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e111]:
+              - link "Cypress End-to-End Testing" [ref=e112] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+            - listitem [ref=e113]:
+              - link "Appium Mobile Testing" [ref=e114] [cursor=pointer]:
+                - /url: https://rahulshettyacademy.com
+        - generic [ref=e115]:
+          - heading "QA Job Hiring Platform" [level=3] [ref=e116]
+          - paragraph [ref=e117]: Get hired faster — take skill assessments trusted by top QA employers worldwide.
+          - link "techsmarthire.com →" [ref=e118] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+        - generic [ref=e119]:
+          - heading "EventHub Practice App" [level=3] [ref=e120]
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - link "Browse Events" [ref=e123] [cursor=pointer]:
+                - /url: /events
+            - listitem [ref=e124]:
+              - link "My Bookings" [ref=e125] [cursor=pointer]:
+                - /url: /bookings
+            - listitem [ref=e126]:
+              - link "Manage Events" [ref=e127] [cursor=pointer]:
+                - /url: /admin/events
+            - listitem [ref=e128]:
+              - link "API Documentation" [ref=e129] [cursor=pointer]:
+                - /url: https://api.eventhub.rahulshettyacademy.com/api/docs
+      - generic [ref=e130]:
+        - paragraph [ref=e131]: © 2026 Rahul Shetty Academy. All rights reserved.
+        - generic [ref=e132]:
+          - link "rahulshettyacademy.com →" [ref=e133] [cursor=pointer]:
+            - /url: https://rahulshettyacademy.com
+          - link "techsmarthire.com →" [ref=e134] [cursor=pointer]:
+            - /url: https://techsmarthire.com
+  - alert [ref=e4]
+  - dialog "Cancel this booking?" [ref=e137]:
+    - generic [ref=e138]:
+      - heading "Cancel this booking?" [level=2] [ref=e139]
+      - button "Close" [ref=e140] [cursor=pointer]:
+        - img [ref=e141]
+    - generic [ref=e143]:
+      - paragraph [ref=e144]: Cancelling D-4ZB62F will release 1 seat(s) back to the event. This cannot be undone.
+      - generic [ref=e145]:
+        - button "Cancel" [ref=e146] [cursor=pointer]
+        - button "Yes, cancel it" [ref=e147] [cursor=pointer]
