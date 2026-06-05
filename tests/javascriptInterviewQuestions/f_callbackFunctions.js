@@ -29,5 +29,6 @@ function modifiedData(data) {
     console.log("Modifying data:", data);
 }
 
+//So what will happen is javascript will execute the below fetchData function immediately bt attempting to run the processData function but will wait for the data to be fetched from the server before executing the processData function. This is how promises work in JavaScript, allowing us to handle asynchronous operations and execute code after a certain task is completed without blocking the main thread.
 fetchData(processData);   // ✅ "Processing data: Fetched Data"
 fetchData(modifiedData);  // ✅ "Modifying data: Fetched Data"
