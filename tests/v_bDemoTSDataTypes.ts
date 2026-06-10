@@ -1,6 +1,6 @@
 //static typing where the type of variable is intelligently NOT defined by the value assigned to it
 
-//valid but will throw compiler error
+//valid but will throw compiler error as type is not defined and TypeScript is not able to infer the type
 let message1 = "Hello World!";
 
 //valid and will NOT throw compiler error
