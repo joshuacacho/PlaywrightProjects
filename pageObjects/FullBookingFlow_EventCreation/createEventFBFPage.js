@@ -21,6 +21,9 @@ class CreateEventFBFPage {
 
         //optional
         this.eventImageURL = page.locator("#image-url-(optional)");
+
+        //special - toast after event is created
+        this.succEventCreatedToast = page.getByText("Event created!");
     }
 
     //go to admin events page

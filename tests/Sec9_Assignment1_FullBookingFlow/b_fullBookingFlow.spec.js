@@ -21,6 +21,7 @@ let webContext;
 //for this test i could use a_...spec.js file and storage state json to pass credentials here but its best to 
     //use the username and password from option 2 (store in local file) since the test use is to log in 
     //replicating a normal user flow
+    //refer to APPENDIX A at the end of all tests for explanation
 
 test.beforeAll("Successful Log In", async ({ browser }) => {
     try {
@@ -54,7 +55,8 @@ test.beforeAll("Successful Log In", async ({ browser }) => {
         webContext = await browser.newContext({storageState: 'state.json'});
                 
     } catch (error) {
-        console.error(error.stack);
+        console.error(error.stack); 
+        throw error;  // re-throw so Playwright marks test as FAILED
     }
 })
 
@@ -75,7 +77,7 @@ Step 2 —
     - Assert: toast message Event created! is visible
 */
 
-test("POST Login - Create New Event", async ({ page }) => {
+test("POST Login - Create a New Event", async ({ page }) => {
     try {
 
         //direct injection from storage state
@@ -95,6 +97,11 @@ test("POST Login - Create New Event", async ({ page }) => {
         //set all values on page
         await admEvntPage.eventTitle.fill("My Event For " + Date.now()); //make the events unique
         await admEvntPage.eventDescription.fill("This event is for true AI users only, newbies need not apply");
+
+        //add defeensive coding to ensure event category is visible before entering
+            // .fill takes care of this but for this object type we are using .selectOption
+        // Guard: verify option exists before selecting
+        await expect(admEvntPage.eventCategory, "Event Category dropdown is NOT visible").toBeVisible();
         await admEvntPage.eventCategory.selectOption({ value: 'Workshop' });
         await admEvntPage.eventCity.fill("San Diego"); 
         await admEvntPage.eventVenue.fill("30 Memorial Ave Avon, Massachussetts 02332"); 
@@ -105,18 +112,40 @@ test("POST Login - Create New Event", async ({ page }) => {
         console.log(futureDate)
         await admEvntPage.eventDateTime.fill(futureDate);  //this returns 2026-06-18T13:58
 
-        await admEvntPage.eventPrice.fill(100);
-        await admEvntPage.eventTotalSeats.fill(50);
+        await admEvntPage.eventPrice.fill("100");
+        await admEvntPage.eventTotalSeats.fill("50");
 
+        // Guard: add Event button is visible before selecting
+        await expect(admEvntPage.addEventButton, "Add Event Button is NOT visible").toBeVisible();
         await admEvntPage.addEventButton.click();
+
+        //await for the toast to be seen using expect with guard
+        await expect(admEvntPage.succEventCreatedToast, "Success toast did not appear")
+            .toBeVisible({ timeout: 10000 });
+
+        console.log("Event Created successfully");
                
         await page.pause();
 
     } catch (error) {
         console.error(error.stack);
+        throw error;   // re-throw so Playwright marks test as FAILED
     }
 })
 
+/*
+    Step 3 — Find the event card and capture seats
+    - Navigate to /events
+    - Get all event cards (locate by data-testid="event-card")
+    - Assert the first card is visible (confirms page loaded)
+    - From all cards, filter for the one that contains your event title text
+    - Assert the matched card is visible (timeout 5 seconds)
+    - Read the seat count text from that card (locate element containing text seat, parse integer from its inner text) — store this as seatsBeforeBooking
+*/
+
+test("POST Login - Find the event card and capture seats", async ({ page }) => {
+
+})
 
 //Appendix A
 
