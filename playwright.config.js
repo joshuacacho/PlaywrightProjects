@@ -18,7 +18,7 @@ import { report } from 'node:process';
 const config = ({
   testDir: './tests',
   //override timeouts
-  timeout: 45 * 1000, //45 seconds to finish ALL TESTS IN A FILE, if any test takes more than 45 seconds, it will be marked as failed
+  timeout: 30 * 1000, //45 seconds to finish ALL TESTS IN A FILE, if any test takes more than 45 seconds, it will be marked as failed
   //assertion timeout
   expect: {
     timeout: 10000 //10 seconds
@@ -26,7 +26,7 @@ const config = ({
   //run tests in a single worker to avoid any issues with parallel execution, especially when dealing with shared resources or state that may not be thread-safe. This can help to ensure that tests run sequentially and do not interfere with each other, which can be particularly important for certain types of tests that rely on specific timing or order of execution.
   workers: 8,
   //number of times to retry a failed test, can be set to a specific number or to 0 to disable retries, this can be useful for handling flaky tests and improving test stability by allowing them to be retried a certain number of times before being marked as failed.
-  retries: 1,  
+  //retries: 1,  
   //add reporter in html
   reporter: 'html',
   use: {
