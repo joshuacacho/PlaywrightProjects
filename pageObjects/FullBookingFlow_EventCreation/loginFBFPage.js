@@ -21,6 +21,7 @@ class LoginFBFPage {
         }
         catch (error) {
             console.error(error.stack);
+            throw error;
         }
     }
 
@@ -31,6 +32,7 @@ class LoginFBFPage {
             await this.signInButton.click();
         } catch (error) {
             console.error(error.stack);
+            throw error;
         }
     }
 

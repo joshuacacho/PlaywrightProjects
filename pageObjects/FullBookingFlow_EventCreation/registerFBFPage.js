@@ -29,6 +29,7 @@ class RegisterPage {
             await this.regCreateAccountButton.click();
         } catch (error) {
             console.error(error.stack)
+            throw error;
         }
     }
 }

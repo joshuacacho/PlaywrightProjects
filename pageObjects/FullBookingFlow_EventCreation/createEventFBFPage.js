@@ -34,28 +34,35 @@ class CreateEventFBFPage {
         }
         catch (error) {
             console.error(error.stack);
+            throw error;
         }
     }
 
     //obtain future date
     async setFutureDate(daysAhead) {
 
-        //NOTE
+        try {
+            //NOTE
             //date and time values are very specific so its not a good idea to assume what the format "might be"
             //to find out the specific date time format you can use the below
             const inputType = await this.eventDateTime.getAttribute('type');
             console.log(inputType); // tells you exactly what format is needed which is datetime-local
         
-        //now we can return the value in the expected format and set it in the field
-        let futureDate = new Date(Date.now() + daysAhead * 24 * 60 * 60 * 1000);
-        return futureDate.toISOString().slice(0, 16); // "2026-06-18T13:58"
+            //now we can return the value in the expected format and set it in the field
+            let futureDate = new Date(Date.now() + daysAhead * 24 * 60 * 60 * 1000);
+            return futureDate.toISOString().slice(0, 16); // "2026-06-18T13:58"
 
-        /*
-            The key takeaway:
-            Display to users → toLocaleString('en-US') (readable)
-            HTML datetime-local inputs → toISOString().slice(0, 16) (strict format)
-            Databases → usually ISO format toISOString() or YYYY-MM-DD
-        */
+            /*
+                The key takeaway:
+                Display to users → toLocaleString('en-US') (readable)
+                HTML datetime-local inputs → toISOString().slice(0, 16) (strict format)
+                Databases → usually ISO format toISOString() or YYYY-MM-DD
+            */
+        } catch (error) {
+            console.error(error.stack);
+            throw error;
+        }
+        
     }
    
 }

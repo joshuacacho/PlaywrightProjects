@@ -1,13 +1,26 @@
 //Full Event Booking Flow
 
+/* 
+
+    Simple Rules for Assertion 
+    Simple rule:
+    ---------------------------------------------------------
+    Involves                                   Need await?
+    page, locator, DOM element                 ✅ Yes
+    Plain JS value (string, number, boolean)   ❌ No
+    ---------------------------------------------------------
+*/
+
 const {test, expect} = require('@playwright/test');
 const { PageObjectManagerFBF } = require("../../pageObjects/FullBookingFlow_EventCreation/pageObjectFBFManager");
 
 // /testData/credentials.js
 const { email, password } = require("./testData/credentials");
+const { EventsFBFPage } = require('../../pageObjects/FullBookingFlow_EventCreation/eventsFBFPage');
 
 //global values
 let webContext;
+let eventTitle;
 
 /*
     Step 1 — Login
@@ -53,11 +66,13 @@ test.beforeAll("Successful Log In", async ({ browser }) => {
         //Inject the state.json file in a new browser context with the existing storage data from above
         //now any new browser context has all the information it needs to act like a log in
         webContext = await browser.newContext({storageState: 'state.json'});
+
+        console.log("Before All Storage State success");
                 
     } catch (error) {
         console.error(error.stack); 
         throw error;  // re-throw so Playwright marks test as FAILED
-    }
+    } 
 })
 
 /*
@@ -95,7 +110,9 @@ test("POST Login - Create a New Event", async ({ page }) => {
         await expect(page).toHaveURL(/\/admin\/events/);  //verify url has admin and events in it
 
         //set all values on page
-        await admEvntPage.eventTitle.fill("My Event For " + Date.now()); //make the events unique
+        eventTitle = "My Event For " + Date.now();
+        await admEvntPage.eventTitle.fill(eventTitle); //make the events unique
+        console.log(eventTitle);
         await admEvntPage.eventDescription.fill("This event is for true AI users only, newbies need not apply");
 
         //add defeensive coding to ensure event category is visible before entering
@@ -125,12 +142,12 @@ test("POST Login - Create a New Event", async ({ page }) => {
 
         console.log("Event Created successfully");
                
-        await page.pause();
+        // await page.pause();
 
     } catch (error) {
         console.error(error.stack);
         throw error;   // re-throw so Playwright marks test as FAILED
-    }
+    } 
 })
 
 /*
@@ -143,7 +160,57 @@ test("POST Login - Create a New Event", async ({ page }) => {
     - Read the seat count text from that card (locate element containing text seat, parse integer from its inner text) — store this as seatsBeforeBooking
 */
 
-test("POST Login - Find the event card and capture seats", async ({ page }) => {
+test("POST Login - Find the event card and capture seats", async ({page}) => {
+
+    try {
+        //direct injection from storage state
+        //creatinga. new page using the webContext from .beforeAll with ALL OF THE 
+        const page = await webContext.newPage();
+            
+        //navigate to the URL without using the log in credentials again
+        // const adminEventsURL = "https://eventhub.rahulshettyacademy.com/admin/events";
+        // await page.goto(adminEventsURL);  //will be able to access
+
+        //initiate Page Object MAnager Class now and assert you are on the right page
+        const pObjManager = new PageObjectManagerFBF(page);
+        const homeEvntPage =  pObjManager.getEventsHomePage();
+        await homeEvntPage.goToEventsPage();
+        await expect(page).toHaveURL(/.*events/);  //verify url has events in it
+
+        //assert first card is visible
+        await expect(homeEvntPage.dataEvenCards.first(), "First Card is Not Visible Yet").toBeVisible();
+
+        //From all cards, filter for the one that contains your event title text
+        const myEventCard = homeEvntPage.dataEvenCards.filter( {hasText : eventTitle} );
+        console.log("my event card is " + await myEventCard.textContent());
+        /*
+            // ❌ Wrong - textContent() returns a Promise, not a locator
+            await expect(myEventCard.textContent()).toBeVisible();
+            // ❌ Wrong - textContent() returns a Promise, not a locator
+            await expect(myEventCard.textContent()).toContain(eventTitle);
+        */
+        await expect(myEventCard).toBeVisible( {timeout: 5000} );
+        await expect(myEventCard).toContainText(eventTitle);
+
+        //Read the seat count text from that card (locate element containing text seat, 
+        // parse integer from its inner text) — store this as seatsBeforeBooking
+            //TEXT FROM MY EVENT CARD --- my event card is WorkshopMy Event For 1781371468358Fri, 19 Jun30 Memorial Ave Avon, Massachussetts 02332, San Diego$10050 seats availableBook Now
+        const cardText = await myEventCard.textContent();
+        const seatsCardText = cardText.slice(cardText.indexOf("seats") - 3).trim(); //go 3 back from the s
+        const seatsBeforeBooking = parseInt(seatsCardText.slice(0,2));
+        console.log(typeof seatsBeforeBooking + " " + seatsBeforeBooking);
+
+        //no need to use await here and if you did
+            // ⚠️ This will always pass even if wrong - expect() here is just a JS value, not a Playwright locator
+            //await expect(seatsBeforeBooking).toEqual(50);
+        expect(seatsBeforeBooking).toBe(50);
+
+    } catch (error) {
+        console.error(error.stack);
+        throw error;
+    }
+
+    
 
 })
 
