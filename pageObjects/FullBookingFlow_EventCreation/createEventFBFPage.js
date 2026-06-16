@@ -2,6 +2,8 @@
 
 //Logged In Event User Page Objects for /admin/events page
 
+const {expect} = require('@playwright/test');
+
 class CreateEventFBFPage {
 
     constructor(page) {
@@ -38,6 +40,48 @@ class CreateEventFBFPage {
         }
     }
 
+    //return event title
+    async eventTitleRandom() {
+        const eventTitle = "My Event For " + Date.now();
+        return eventTitle;
+    }
+
+    //Create Event
+    async createEventFull(title, description, category, city, venue, daysAhead, price, totalSeats){
+        try {
+            //set all values on page
+            await this.eventTitle.fill(title); //make the events unique
+            console.log(title);
+            await this.eventDescription.fill(description);
+    
+            //add defeensive coding to ensure event category is visible before entering
+                // .fill takes care of this but for this object type we are using .selectOption
+            // Guard: verify option exists before selecting
+            await expect(this.eventCategory, "Event Category dropdown is NOT visible").toBeVisible();
+            await this.eventCategory.selectOption({ value: category });
+            await this.eventCity.fill(city); 
+            await this.eventVenue.fill(venue); 
+            
+            //Event Date time has some data manipulation to return the expected date time format
+                //view the setFutureDate method to see the reasoning
+            const futureDate = await this.setFutureDate(daysAhead);
+            console.log(futureDate)
+            await this.eventDateTime.fill(futureDate);  //this returns 2026-06-18T13:58
+    
+            await this.eventPrice.fill(price);
+            await this.eventTotalSeats.fill(totalSeats);
+    
+            // Guard: add Event button is visible before selecting
+            await expect(this.addEventButton, "Add Event Button is NOT visible").toBeVisible();
+            await this.addEventButton.click();
+    
+
+        } catch (error) {
+            console.error(error.stack);
+            throw error
+        }
+    }
+
     //obtain future date
     async setFutureDate(daysAhead) {
 
@@ -48,7 +92,7 @@ class CreateEventFBFPage {
             const inputType = await this.eventDateTime.getAttribute('type');
             console.log(inputType); // tells you exactly what format is needed which is datetime-local
         
-            //now we can return the value in the expected format and set it in the field
+            //now we can return the value in the expected format and set it in the future
             let futureDate = new Date(Date.now() + daysAhead * 24 * 60 * 60 * 1000);
             return futureDate.toISOString().slice(0, 16); // "2026-06-18T13:58"
 

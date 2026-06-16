@@ -15,12 +15,12 @@ const {test, expect} = require('@playwright/test');
 const { PageObjectManagerFBF } = require("../../pageObjects/FullBookingFlow_EventCreation/pageObjectFBFManager");
 
 // /testData/credentials.js
-const { email, password } = require("./testData/credentials");
-const { EventsFBFPage } = require('../../pageObjects/FullBookingFlow_EventCreation/eventsFBFPage');
+const { email, password, baseURL } = require("./testData/credentials");
 
 //global values
 let webContext;
 let eventTitle;
+let fullEventURL;
 
 /*
     Step 1 — Login
@@ -109,40 +109,16 @@ test("POST Login - Create a New Event", async ({ page }) => {
         await admEvntPage.goToAdminEventsPage();
         await expect(page).toHaveURL(/\/admin\/events/);  //verify url has admin and events in it
 
-        //set all values on page
-        eventTitle = "My Event For " + Date.now();
-        await admEvntPage.eventTitle.fill(eventTitle); //make the events unique
-        console.log(eventTitle);
-        await admEvntPage.eventDescription.fill("This event is for true AI users only, newbies need not apply");
+        eventTitle = await admEvntPage.eventTitleRandom();
 
-        //add defeensive coding to ensure event category is visible before entering
-            // .fill takes care of this but for this object type we are using .selectOption
-        // Guard: verify option exists before selecting
-        await expect(admEvntPage.eventCategory, "Event Category dropdown is NOT visible").toBeVisible();
-        await admEvntPage.eventCategory.selectOption({ value: 'Workshop' });
-        await admEvntPage.eventCity.fill("San Diego"); 
-        await admEvntPage.eventVenue.fill("30 Memorial Ave Avon, Massachussetts 02332"); 
-        
-        //Event Date time has some data manipulation to return the expected date time format
-            //view the setFutureDate method to see the reasoning
-        const futureDate = await admEvntPage.setFutureDate(6);
-        console.log(futureDate)
-        await admEvntPage.eventDateTime.fill(futureDate);  //this returns 2026-06-18T13:58
-
-        await admEvntPage.eventPrice.fill("100");
-        await admEvntPage.eventTotalSeats.fill("50");
-
-        // Guard: add Event button is visible before selecting
-        await expect(admEvntPage.addEventButton, "Add Event Button is NOT visible").toBeVisible();
-        await admEvntPage.addEventButton.click();
+        admEvntPage.createEventFull(eventTitle, "This Event is for serious applicants only",
+            'Workshop', "Avon", "Workshop at the Dam 30 Memorial Ave Avon, MA 02332", 6, "100", "50");
 
         //await for the toast to be seen using expect with guard
         await expect(admEvntPage.succEventCreatedToast, "Success toast did not appear")
             .toBeVisible({ timeout: 10000 });
-
+    
         console.log("Event Created successfully");
-               
-        // await page.pause();
 
     } catch (error) {
         console.error(error.stack);
@@ -166,10 +142,6 @@ test("POST Login - Find the event card and capture seats", async ({page}) => {
         //direct injection from storage state
         //creatinga. new page using the webContext from .beforeAll with ALL OF THE 
         const page = await webContext.newPage();
-            
-        //navigate to the URL without using the log in credentials again
-        // const adminEventsURL = "https://eventhub.rahulshettyacademy.com/admin/events";
-        // await page.goto(adminEventsURL);  //will be able to access
 
         //initiate Page Object MAnager Class now and assert you are on the right page
         const pObjManager = new PageObjectManagerFBF(page);
@@ -178,10 +150,10 @@ test("POST Login - Find the event card and capture seats", async ({page}) => {
         await expect(page).toHaveURL(/.*events/);  //verify url has events in it
 
         //assert first card is visible
-        await expect(homeEvntPage.dataEvenCards.first(), "First Card is Not Visible Yet").toBeVisible();
+        await expect(homeEvntPage.dataEventCards.first(), "First Card is Not Visible Yet").toBeVisible();
 
         //From all cards, filter for the one that contains your event title text
-        const myEventCard = homeEvntPage.dataEvenCards.filter( {hasText : eventTitle} );
+        const myEventCard = homeEvntPage.dataEventCards.filter( {hasText : eventTitle} );
         console.log("my event card is " + await myEventCard.textContent());
         /*
             // ❌ Wrong - textContent() returns a Promise, not a locator
@@ -196,8 +168,8 @@ test("POST Login - Find the event card and capture seats", async ({page}) => {
         // parse integer from its inner text) — store this as seatsBeforeBooking
             //TEXT FROM MY EVENT CARD --- my event card is WorkshopMy Event For 1781371468358Fri, 19 Jun30 Memorial Ave Avon, Massachussetts 02332, San Diego$10050 seats availableBook Now
         const cardText = await myEventCard.textContent();
-        const seatsCardText = cardText.slice(cardText.indexOf("seats") - 3).trim(); //go 3 back from the s
-        const seatsBeforeBooking = parseInt(seatsCardText.slice(0,2));
+        const seatsCardText = cardText.slice(cardText.indexOf("seats") - 3).trim(); //go 3 back from the FIRST s 50 seats
+        const seatsBeforeBooking = parseInt(seatsCardText.slice(0,2)); //50
         console.log(typeof seatsBeforeBooking + " " + seatsBeforeBooking);
 
         //no need to use await here and if you did
@@ -205,14 +177,107 @@ test("POST Login - Find the event card and capture seats", async ({page}) => {
             //await expect(seatsBeforeBooking).toEqual(50);
         expect(seatsBeforeBooking).toBe(50);
 
+        //await page.pause();
+
     } catch (error) {
         console.error(error.stack);
         throw error;
     }
 
-    
-
 })
+
+
+
+/* 
+    Step 4 — Start booking
+    - On the matched event card, click the Book Now button (locate by data-testid="book-now-btn" inside the card)
+*/
+
+test("POST Login - Start Booking - Select Book Now Button", async ({page}) => {
+
+      try {
+        //direct injection from storage state
+        //creatinga. new page using the webContext from .beforeAll with ALL OF THE 
+        const page = await webContext.newPage();
+
+        //initiate Page Object MAnager Class now and assert you are on the right page
+        const pObjManager = new PageObjectManagerFBF(page);
+        const homeEvntPage = pObjManager.getEventsHomePage();
+        await homeEvntPage.goToEventsPage();
+        await expect(page).toHaveURL(/.*events/);  //verify url has events in it
+
+        //From all cards, filter for the one that contains your event title text
+        //assert first card is visible
+        await expect(homeEvntPage.dataEventCards.first(), "First Card is Not Visible Yet").toBeVisible();
+
+        //click the book now button for the associated event title
+        const myEventCard = homeEvntPage.dataEventCards.filter( {hasText : eventTitle} );
+
+        //hover over eventTitle Link and construct FULL URL for next text
+        // Hover over the link inside the card by locator eventURLHover violated a strickt mode violation
+            //in the error the below observation was given from playwright to use
+            //aka getByRole('link', { name: 'My Event For 1781558010437' })
+        const eventLink = myEventCard.getByRole('link', { name: eventTitle })
+        await eventLink.hover();
+        const partialEventURL = await eventLink.getAttribute('href');  ///events/<num>
+        console.log("Partial Event URL is " + partialEventURL);
+
+        fullEventURL = baseURL + partialEventURL;
+        console.log("Full Event URL is: " + fullEventURL);
+        
+        await myEventCard.locator(homeEvntPage.bookNowButtons).click();
+
+
+      } catch (error) {
+        console.error(error.stack);
+        throw error;
+      }
+})
+
+
+/*
+    Step 5 — Fill booking form
+    - Assert: element with id #ticket-count has text 1 (default quantity)
+    - Fill Full Name (locate by label Full Name)
+    - Fill Email (locate by id #customer-email)
+    - Fill Phone (locate by placeholder +91 98765 43210)
+    - Click the confirm button (locate by CSS class .confirm-booking-btn)
+*/
+
+test("POST Login - Fill In the Booking Form", async ({page}) => {
+
+      try {
+        //direct injection from storage state
+        //creatinga. new page using the webContext from .beforeAll with ALL OF THE 
+        const page = await webContext.newPage();
+      
+        //navigate to the constructed fullEventURL constructed from Step 4
+        await page.goto(fullEventURL);
+
+
+        //create event details page object
+        const pObjManager = new PageObjectManagerFBF(page);
+        const evntDetailsPage = pObjManager.getEventDetailsPage();
+
+        //assert ticket count 1
+        const defaultTicketCount = await evntDetailsPage.getTicketCount();
+        console.log(defaultTicketCount);
+        expect(defaultTicketCount, "Ticket Count is NOT 1").toBe(1);
+        
+        evntDetailsPage.bookTicketsNoUpdate("Random Me", "test@test.com", "584-874-5712");
+        
+        await page.pause();
+
+      } catch (error) {
+        console.error(error.stack);
+        throw error;
+      }
+})
+
+
+
+
+
 
 //Appendix A
 

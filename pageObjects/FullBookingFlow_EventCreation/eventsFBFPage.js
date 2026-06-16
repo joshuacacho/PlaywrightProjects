@@ -10,8 +10,8 @@ class EventsFBFPage {
 
         //define items that need to be used to. log in
         this.addNewEventButton = page.locator("button[type='button']");
-        this.dataEvenCards = page.locator("article[data-testid='event-card']"); //Get all event cards (locate by data-testid="event-card")
-        
+        this.dataEventCards = page.locator("article[data-testid='event-card']"); //Get all event cards (locate by data-testid="event-card")
+        this.bookNowButtons = page.locator("#book-now-btn");
     }
 
     async goToEventsPage() {

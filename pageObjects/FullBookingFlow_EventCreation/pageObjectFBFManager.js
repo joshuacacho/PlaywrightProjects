@@ -6,6 +6,8 @@ const { RegisterPage } = require("./registerFBFPage");
 const { LoggedInFBFPage } = require("./loggedinFBFPage");
 const { EventsFBFPage } = require("./eventsFBFPage");
 const { CreateEventFBFPage } = require("./createEventFBFPage");
+const { EventDetailsFBFPage } = require("./eventsDetailFBFPage");
+
 
 class PageObjectManagerFBF {
 
@@ -19,6 +21,7 @@ class PageObjectManagerFBF {
         this.loggedInHomePage = new LoggedInFBFPage(this.page);
         this.eventsPage = new EventsFBFPage(this.page);
         this.createEventPage = new CreateEventFBFPage(this.page);
+        this.eventDetailPage = new EventDetailsFBFPage(this.page);
     }
 
     //creating custom methods to get the different pages
@@ -44,7 +47,12 @@ class PageObjectManagerFBF {
     getCreateEventPage() {
         return this.createEventPage;
     }
-}
 
+    //user must be logged in
+    getEventDetailsPage() {
+        return this.eventDetailPage;
+    }
+
+}
 //export class to be used globally
 module.exports = { PageObjectManagerFBF };
