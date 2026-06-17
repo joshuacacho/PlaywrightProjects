@@ -7,6 +7,7 @@ const { LoggedInFBFPage } = require("./loggedinFBFPage");
 const { EventsFBFPage } = require("./eventsFBFPage");
 const { CreateEventFBFPage } = require("./createEventFBFPage");
 const { EventDetailsFBFPage } = require("./eventsDetailFBFPage");
+const { MyBookingsFBFPage } = require("./myBookingsFBFPage");
 
 
 class PageObjectManagerFBF {
@@ -22,6 +23,7 @@ class PageObjectManagerFBF {
         this.eventsPage = new EventsFBFPage(this.page);
         this.createEventPage = new CreateEventFBFPage(this.page);
         this.eventDetailPage = new EventDetailsFBFPage(this.page);
+        this.myBookingsPage = new MyBookingsFBFPage(this.page);
     }
 
     //creating custom methods to get the different pages
@@ -51,6 +53,11 @@ class PageObjectManagerFBF {
     //user must be logged in
     getEventDetailsPage() {
         return this.eventDetailPage;
+    }
+
+    //user must be logged in
+    getMyBookingsPage() {
+        return this.myBookingsPage;
     }
 
 }
