@@ -1,4 +1,4 @@
-//Full Event Booking Flow
+// Full Event Booking Flow
 
 /* 
 
@@ -9,6 +9,19 @@
     page, locator, DOM element                 ✅ Yes
     Plain JS value (string, number, boolean)   ❌ No
     ---------------------------------------------------------
+*/
+
+
+/*
+    For identifying objects on a page best to use playwrights built it method whenever you can
+
+    1. getByRole()      → best (mimics how users/assistive tech see the page)
+    2. getByText()      → good for visible text content
+    3. getByLabel()     → great for form fields
+    4. getByPlaceholder() → good for inputs
+    5. getByTestId()    → great when role/text isn't reliable or unique
+    6. CSS/XPath (#id, .class) → last resort
+
 */
 
 const {test, expect} = require('@playwright/test');
@@ -264,6 +277,7 @@ test("Step 3 - POST Login - Find the event card and capture seats", async () => 
 
         //await page.pause();
 
+        console.log("Found Event and Captures Seats successfully");
     } catch (error) {
         console.error(error.stack);
         throw error;
@@ -299,6 +313,7 @@ test("Step 4 - POST Login - Start Booking - Select Book Now Button", async () =>
 
         await myEventCard.locator(homeEvntPage.bookNowButtons).click();
 
+        console.log("Started Booking successfully");
 
       } catch (error) {
         console.error(error.stack);
@@ -353,6 +368,8 @@ test("Step 5 - POST Login - Fill In the Booking Form", async () => {
 
         //await page.pause();
 
+        console.log("Filled in Booking Form successfully");
+
       } catch (error) {
         console.error(error.stack);
         throw error;
@@ -374,6 +391,9 @@ test("Step 6 - POST Login - Verify Booking Information ", async () => {
         //assertion if value is visible after creating is done in the getBookingReference method
         bookingReference = await evntDetailsPage.getBookingReference(); 
         console.log("Booking reference is " + bookingReference);
+
+
+        console.log("Verified Booking Information successfully");
     } catch (error) {
         console.error(error.stack);
         throw error;
@@ -411,6 +431,7 @@ test("Step 7 - POST Login - Verify in My Bookings", async () => {
         await expect(myBookRef).toBeVisible();
         expect(myBookRefText).toBe(bookingReference);
 
+        console.log("Verified My Booking Information successfully");
 
     } catch (error) {
         console.error(error);
@@ -454,6 +475,8 @@ test("Step 8 - POST Login - Verify seat reduction", async () => {
         console.log("POST event creation - seats after booking " + seatsAfterBooking);
 
         expect(seatsAfterBooking).toBe(seatsBeforeBooking-defaultTicketCount);
+
+        console.log("Verified Seat Reduction successfully");
 
     } catch (error) {
         console.error(error.stack);

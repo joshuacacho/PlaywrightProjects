@@ -1,5 +1,7 @@
 //Login Page Objects for /login page
 
+const {expect} = require('@playwright/test');
+
 class LoginFBFPage {
 
     constructor(page) {
@@ -29,12 +31,16 @@ class LoginFBFPage {
         try {
             await this.email.fill(email);
             await this.userPassword.fill(password);
+
+            await expect(this.signInButton, "sign in button is not visible").toBeVisible();
             await this.signInButton.click();
         } catch (error) {
             console.error(error.stack);
             throw error;
         }
     }
+
+    
 
         
 }

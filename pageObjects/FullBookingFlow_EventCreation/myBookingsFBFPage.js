@@ -12,6 +12,8 @@ class MyBookingsFBFPage {
 
         this.myBookingsLink = page.locator("#nav-bookings");
         this.bookingCards = page.locator("#booking-card");
+        this.viewDetailButtons = page.getByRole( 'button', { name: 'View Details'});
+        this.bookingReference = page.locator(".booking-ref");
 
     }
 

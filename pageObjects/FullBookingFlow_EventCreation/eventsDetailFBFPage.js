@@ -10,6 +10,7 @@ class EventDetailsFBFPage {
         //activates browser for the entire page
         this.page = page;
         this.ticketCount = page.locator("#ticket-count");  //id #ticket-count has text 1 (default quantity)
+        this.incrementTicketCount = page.getByRole("button", { name : '+'});
         this.fullName = page.getByLabel("Full Name"); //Fill Full Name (locate by label Full Name)
         this.email = page.locator("#customer-email"); //Fill Email (locate by id #customer-email)
         this.phone = page.getByPlaceholder("+91 98765 43210"); //Fill Phone (locate by placeholder +91 98765 43210)
@@ -34,6 +35,7 @@ class EventDetailsFBFPage {
     //book tickets but DONT update anything outside of the fields below
         //i.e. leave the tickets at count 1, etc...
     async bookTicketsNoUpdate(fullName, email, phone) {
+        
         try {
             await this.fullName.fill(fullName);
             await this.email.fill(email);

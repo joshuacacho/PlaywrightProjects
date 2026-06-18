@@ -33,11 +33,11 @@ class EventsFBFPage {
             await expect(this.eventsLink, "Events  Link is Not Visible").toBeVisible();
             await this.eventsLink.click();
         } catch (error) {
-            console.error(error.stack);
-            throw error;
-        }
+                console.error(error.stack);
+                throw error;
+            }
        
-        }
+    }
    
 }
 
