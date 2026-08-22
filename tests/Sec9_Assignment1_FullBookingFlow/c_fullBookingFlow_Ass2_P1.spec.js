@@ -242,9 +242,8 @@ test("Step 6 - POST Login - Validate result", async () => {
 
     try {
 
-        const refundStatusText = await myBookingsDetailsPage.refundEligiblityStatus.textContent();
-        console.log(refundStatusText);
-        await expect(refundStatusText).toContain("Eligible for refund. Single-ticket bookings qualify for a full refund.")
+        await expect(myBookingsDetailsPage.refundEligiblityStatus)
+            .toContainText('Eligible for refund. Single-ticket bookings qualify for a full refund.');
         
     } catch (error) {
         console.error(error.stack);
