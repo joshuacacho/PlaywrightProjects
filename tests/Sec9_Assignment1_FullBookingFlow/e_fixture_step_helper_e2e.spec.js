@@ -1,5 +1,5 @@
 const { test, expect } = require('../../pageObjects/FullBookingFlow_EventCreation/pageObjectFixtures');
-const { email, password, baseURL, defaultCustomer } = require('./testData/credentials');
+const { baseURL, defaultCustomer } = require('./testData/credentials');
 const {
   bookFirstEventDefaultTicket,
   goToFirstBookingDetail,

@@ -1,7 +1,7 @@
 // fixtures/pageObjectFixtures.js
 const base = require('@playwright/test');
 const { loginAndInitPageObjects } = require('../../pageObjects/FullBookingFlow_EventCreation/helpers/loginAndInitPageObjects.js');
-const { email, password, baseURL, defaultCustomer } = require('../../tests/Sec9_Assignment1_FullBookingFlow/testData/credentials');
+const { email, password } = require('../../tests/Sec9_Assignment1_FullBookingFlow/testData/credentials');
 
 exports.test = base.test.extend({
   loggedInPage: async ({ browser }, use) => {
