@@ -6,3 +6,12 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/allure-report/
+/allure-results/
+/playwright-report/
+/test-results/
+/cucumber-report.html
+/.playwright-cli/
+/.playwright-mcp/
+state.json
+*.png
