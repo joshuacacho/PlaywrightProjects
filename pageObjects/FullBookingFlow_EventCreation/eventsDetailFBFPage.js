@@ -53,6 +53,32 @@ class EventDetailsFBFPage {
 
     }
 
+    //book tickets but AND update anything outside of the fields below
+        //i.e. leave the tickets at count 1, etc...
+    async bookTicketsWithUpdate(fullName, email, phone, ticketCount) {
+        
+        try {
+            await this.fullName.fill(fullName);
+            await this.email.fill(email);
+            await this.phone.fill(phone);
+
+
+            //increment button count by 3
+            for (let i = 1; i < ticketCount; i++) {
+                await this.incrementTicketCount.click();
+            }
+            
+            //Guard to check for confirm button is presnet
+            await expect(this.confirmButton, "Confirm button is not visible").toBeVisible();
+            await this.confirmButton.click();
+      
+        } catch (error) {
+            console.error(error.stack);
+            throw error;
+        }
+
+    }
+
     //get booking refence
     async getBookingReference() {
         try {

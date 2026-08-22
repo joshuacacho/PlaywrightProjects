@@ -1,0 +1,23 @@
+The overall approach: "Fixture-based Page Object Model" (or POM + Dependency Injection)
+
+This is the closest thing to a common term for it — combining the Page Object Model (POM) with Playwright's fixture system acting as a dependency-injection mechanism. You'll see this phrase or close variants in Playwright's own docs and community writeups.
+
+Broken into its component parts, each with a more established name:
+
+1. Page Object Model (POM)
+
+The practice of wrapping each page/screen's locators and actions into a class (LoginPage, EventDetailsPage, etc.) so tests interact with methods like loginPage.login(...) instead of raw selectors. This is decades old, originally from Selenium, and is the most universally recognized piece of what you're doing.
+
+2. Dependency Injection via Fixtures
+
+Playwright's test.extend() mechanism is literally Playwright's built-in DI container — fixtures declare what they need (browser), produce a value (loggedInPage), and tests declare what they need in their parameter list. This is the same DI concept from other frameworks (Spring, Angular), just scoped to test setup/teardown. Playwright's docs call this simply "fixtures."
+
+3. Test Step / Workflow decomposition
+
+Pulling reusable action sequences (bookFirstEventDefaultTicket, goToFirstBookingDetail) out of the test body into named functions is sometimes called the "Screenplay Pattern" in its fuller form (popularized in the Serenity BDD/Java world) — though what you're doing is a lighter-weight version of it: functional step helpers rather than full Actor/Task/Question objects. Combined with Playwright's native test.step() for reporting, this is just good test composition — not really a named pattern on its own, more a general software engineering principle (single responsibility, DRY) applied to test code.
+
+4. Centralized Test Data
+
+Not really a "pattern" with a name — just test data management / fixtures data separation, a general test-automation best practice.
+
+So if someone asks what you're using, "Page Object Model with Playwright fixtures" is the accurate, recognizable answer — that's the term that'll mean something to another Playwright dev. The step-helper and centralized-data pieces are best practices layered on top rather than named patterns in their own right.

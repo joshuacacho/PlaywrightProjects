@@ -1,0 +1,58 @@
+Good instinct — here are some challenges that build on what you already have, roughly ordered easy → hard. Each one is designed to either reinforce a pattern you already know or introduce a genuinely new wrinkle worth practicing.
+
+----------------------------------------------------------
+
+1. Cancel a booking (reinforces existing pattern)
+
+Book an event, navigate to booking detail (reuse goToFirstBookingDetail), then find and click a cancel button, and assert the booking status changes to "Cancelled" (or it disappears from /bookings).
+
+New method needed: likely cancelBooking() on myBookingsDetailsPage.
+New step helper: cancelFirstBooking(myBookingsDetailsPage).
+Good warm-up — same shape as your refund flow, different button/assertion.
+
+----------------------------------------------------------
+
+2. Validate the booking form rejects an empty required field
+
+Try to book an event but leave fullName blank — assert the confirm button either stays disabled, or an inline validation error appears, and assert no booking gets created (count of bookings before/after stays the same).
+
+New wrinkle: negative-path testing — asserting something doesn't happen, and comparing state before/after rather than just checking a final state.
+Forces you to think about what "count my bookings" looks like as a reusable helper (getBookingCount(myBookingsPage)), which is useful for challenge 5 below too.
+
+----------------------------------------------------------
+
+3. Book an event with zero seats remaining
+
+Find an event card with "0 seats left" (or programmatically decrement one down via repeated bookings first), attempt to book it, and assert the app blocks it — button disabled, or an error message like "Sold out."
+
+New wrinkle: you'll need a helper to find a specific card by condition rather than always grabbing .first() — e.g. findEventCardBySeatsAvailable(homeEvntPage, minSeats). Good practice with Playwright locator filtering (.filter({ hasText: ... })).
+
+----------------------------------------------------------
+
+4. Decrement ticket count back down
+
+Increment to 3 tickets, then decrement back to 1 before confirming, and assert the final booking only reflects 1 ticket.
+
+New method: decrementTicketCount locator/action on evntDetailsPage, paired into a new step like bookTicketsWithAdjustment(page, customer, incrementBy, decrementBy).
+Tests that your increment/decrement UI interactions compose correctly — good place to re-catch a "clicked before submit" style bug if you introduce one.
+
+----------------------------------------------------------
+
+5. Verify booking count increases by exactly 1 after booking
+
+Read getBookingCount() before booking, book an event, read it again after, assert after === before + 1.
+
+New wrinkle: state comparison across two points in time — you'll need to store a value from an early step and reference it in a later one, similar to how you already do this with bookingCode, but now with a count instead of a string.
+This is a great one because it forces a reusable getBookingCount(myBookingsPage) helper, which then becomes useful in challenges 2 and 6.
+
+----------------------------------------------------------
+
+6. Full negative-path refund test: booking made 8+ days ago is ineligible (if the app supports it)
+
+If EventHub has any date-based refund rule (check the actual eligibility copy/logic in the app — you may need to search or inspect), test that an old booking is correctly marked ineligible, contrasting with your existing "single ticket is eligible" test.
+
+New wrinkle: may require API-level setup (seeding a booking with an old date) rather than pure UI, if there's no way to backdate a booking through the UI. This is a good intro to mixing page.request (Playwright's API testing) into an otherwise UI-driven flow — a very real-world pattern.
+
+My suggestion: start with #1 (cancel booking) since it's the most direct rerun of your existing muscle memory, then jump to #5 (count comparison) since that reusable count-helper will make #2 and future tests easier to write. Save #6 for last — it's the one most likely to require exploring the app's actual behavior/API before you can even write the test.
+
+Want me to review your myBookingsDetailsPage.js / myBookingsFBFPage.js first so I can tell you exactly what locators/methods already exist vs. what you'd need to add for #1?

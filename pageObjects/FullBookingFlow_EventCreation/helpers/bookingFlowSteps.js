@@ -10,6 +10,14 @@ async function bookFirstEventDefaultTicket(homeEvntPage, evntDetailsPage, custom
   await evntDetailsPage.bookTicketsNoUpdate(customer.name, customer.email, customer.phone);
 }
 
+async function bookingFirstEventMultipleTickets(homeEvntPage, evntDetailsPage, customer, ticketcount) {
+  await homeEvntPage.goToEventsPage();
+  const firstEventCard = homeEvntPage.dataEventCards.first();
+  await expect(firstEventCard, "Data Event Cards Not Visible").toBeVisible();
+  await firstEventCard.locator(homeEvntPage.bookNowButtons).click();
+  await evntDetailsPage.bookTicketsWithUpdate(customer.name, customer.email, customer.phone, ticketcount)
+}
+
 async function goToFirstBookingDetail(myBookingsPage) {
   await myBookingsPage.myBookingsLink.click();
   await expect(myBookingsPage.bookingCards.first(), 'my booking cards are not visible').toBeVisible();
@@ -26,6 +34,7 @@ async function validateBookingRefMatches(myBookingsDetailsPage, expectedCode) {
   expect(actualCode.trim()).toBe(expectedCode.trim());
 }
 
+
 async function checkRefundEligibility(myBookingsDetailsPage) {
   await myBookingsDetailsPage.checkRefundEligibility.click();
   await expect(myBookingsDetailsPage.refundSpinner).toBeVisible();
@@ -34,6 +43,7 @@ async function checkRefundEligibility(myBookingsDetailsPage) {
 
 module.exports = {
   bookFirstEventDefaultTicket,
+  bookingFirstEventMultipleTickets,
   goToFirstBookingDetail,
   validateBookingRefMatches,
   checkRefundEligibility,
