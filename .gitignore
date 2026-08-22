@@ -1,4 +1,3 @@
-
 # Playwright
 node_modules/
 /test-results/
@@ -8,10 +7,9 @@ node_modules/
 /playwright/.auth/
 /allure-report/
 /allure-results/
-/playwright-report/
-/test-results/
 /cucumber-report.html
 /.playwright-cli/
 /.playwright-mcp/
 state.json
-*.png
+features/screenshots/*.png
+/*.png
