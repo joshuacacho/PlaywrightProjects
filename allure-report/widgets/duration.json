@@ -1,1 +1,0 @@
-[{"uid":"ae60e6e632eb3d3c","name":"@WebgetByPlaceHolder","time":{"start":1776023160763,"stop":1776023165581,"duration":4818},"status":"passed","severity":"normal"},{"uid":"64ab45105ae41c23","name":"@Web GetByLabel & Playwright UI Runner","time":{"start":1776023160761,"stop":1776023165261,"duration":4500},"status":"passed","severity":"normal"}]
